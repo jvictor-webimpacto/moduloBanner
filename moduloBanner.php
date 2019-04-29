@@ -88,20 +88,20 @@ class ModuloBanner extends Module
 		}
 		elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner'))
 		{
-			$this->html .= $this->renderForm();
-			return $this->html;
+				$this->html .= $this->renderForm();
+				return $this->html;
 		}
 		else if (Tools::isSubmit('deletemoduloBanner'))
 		{
-			$banner = new Banner((int)$id_banner);
-			$banner->delete();
-			$this->_clearCache('category.tpl');
-			Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'));
+				$banner = new Banner((int)$id_banner);
+				$banner->delete();
+				$this->_clearCache('category.tpl');
+				Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'));
 		}
 		else
 		{
-			$this->html .= $this->renderList();
-			return $this->html;
+				$this->html .= $this->renderList();
+				return $this->html;
 		}
 	}
 

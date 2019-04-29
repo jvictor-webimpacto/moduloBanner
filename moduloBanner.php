@@ -60,8 +60,6 @@ class ModuloBanner extends Module
 		}
 	}
 
-	
-
     public function install()
     {
         include(dirname(__FILE__).'\sql\install.php');
@@ -108,9 +106,9 @@ class ModuloBanner extends Module
 	
 	protected function renderForm()
 	{
-		$image_size = "";
-		$image_url = "";	
-		$fields_form = array(
+			$image_size = "";
+			$image_url = "";	
+			$fields_form = array(
 			'tinymce' => true,
 			'legend' => array(
 				'title' => $this->l('Este es mi formulario del banner'),

@@ -53,7 +53,7 @@ class ModuloBanner extends Module
 		
         $this->fieldImageSettings = array(
             'name' => 'image',
-            'dir' => 'object'
+            'dir' => 'object',
         ); 
     	if (!Configuration::get('moduloBanner')) {
             $this->warning = $this->l('No name provided');

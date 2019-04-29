@@ -55,8 +55,7 @@ class ModuloBanner extends Module
             'name' => 'image',
             'dir' => 'object'
         ); 
-    
-        if (!Configuration::get('moduloBanner')) {
+    	if (!Configuration::get('moduloBanner')) {
             $this->warning = $this->l('No name provided');
         }
     }
@@ -68,16 +67,14 @@ class ModuloBanner extends Module
 		$this->registerHook('displayLeftColumn') && 
 		$this->registerHook('displayRightColumn') && 
 		$this->registerHook('displayTopColumn') && 
-		$this->registerHook('displayFooter') ;
+		$this->registerHook('displayFooter');
 	}
 	
 
 	public function getContent()
 	{
 		$id_banner = (int)Tools::getValue('id_banner');
-		
-		$this->html ="";
-		
+		$this->html = "";
 		if (Tools::isSubmit('savemoduloBanner'))
 		{
 			if ($this->processSave()){

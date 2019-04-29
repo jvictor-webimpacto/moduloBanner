@@ -108,10 +108,7 @@ class ModuloBanner extends Module
 			return $this->html;
 		}
 
-		
-	
-
-
+	}
 	
 	protected function renderForm()
 	{

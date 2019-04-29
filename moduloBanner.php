@@ -57,44 +57,44 @@ class ModuloBanner extends Module
         );
     	if (!Configuration::get('moduloBanner')) {
             $this->warning = $this->l('No name provided');
-		}
+				}
 	}
 	
     public function install()
     {
         include(dirname(__FILE__).'\sql\install.php');
         return parent::install() &&
-		$this->registerHook('displayLeftColumn') &&
-		$this->registerHook('displayRightColumn') &&
-		$this->registerHook('displayTopColumn') &&
-		$this->registerHook('displayFooter');
+        	$this->registerHook('displayLeftColumn') &&
+        	$this->registerHook('displayRightColumn') &&
+        	$this->registerHook('displayTopColumn') &&
+        	$this->registerHook('displayFooter');
 	}
 	
 
 	public function getContent()
 	{
-		$id_banner = (int)Tools::getValue('id_banner');
-		$this->html = "";
-		if (Tools::isSubmit('savemoduloBanner')) {
-			if ($this->processSave()) {
-				return $this->html . $this->renderList();
+			$id_banner = (int)Tools::getValue('id_banner');
+			$this->html = "";
+			if (Tools::isSubmit('savemoduloBanner')) {
+				if ($this->processSave()) {
+					return $this->html . $this->renderList();
+				}
+				else {
+					return $this->html . $this->renderForm();
+				}
+			} elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
+					$this->html .= $this->renderForm();
+					return $this->html;
+			} else if (Tools::isSubmit('deletemoduloBanner')) {
+					$banner = new Banner((int)$id_banner);
+					$banner->delete();
+					$this->_clearCache('category.tpl');
+					Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'));
 			}
 			else {
-				return $this->html . $this->renderForm();
-			}
-		} elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
-				$this->html .= $this->renderForm();
+				$this->html .= $this->renderList();
 				return $this->html;
-		} else if (Tools::isSubmit('deletemoduloBanner')) {
-				$banner = new Banner((int)$id_banner);
-				$banner->delete();
-				$this->_clearCache('category.tpl');
-				Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'));
-		}
-		else {
-			$this->html .= $this->renderList();
-			return $this->html;
-		}
+			}
 	}
     
 	protected function renderForm()
@@ -162,68 +162,68 @@ class ModuloBanner extends Module
 		);
 
 
-		$helper = new HelperForm();
-		$helper->module = $this;
-		$helper->identifier = $this->identifier;
-		$helper->token = Tools::getAdminTokenLite('AdminModules');
-		$helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
-		$helper->toolbar_scroll = true;
-		$helper->title = $this->displayName;
-		$helper->submit_action = 'savemoduloBanner';
+			$helper = new HelperForm();
+			$helper->module = $this;
+			$helper->identifier = $this->identifier;
+			$helper->token = Tools::getAdminTokenLite('AdminModules');
+			$helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
+			$helper->toolbar_scroll = true;
+			$helper->title = $this->displayName;
+			$helper->submit_action = 'savemoduloBanner';
 
 		
-		$helper->fields_value = $this->getFormValues();
+			$helper->fields_value = $this->getFormValues();
 
-		return $helper->generateForm(array(array('form' => $fields_form)));
+			return $helper->generateForm(array(array('form' => $fields_form)));
 	}
 
 
 	protected function renderList()
 	{
-		$this->fields_list = array();
-		$this->fields_list['id_banner'] = array(
+			$this->fields_list = array();
+			$this->fields_list['id_banner'] = array(
 				'title' => $this->l('Id banner'),
 				'type' => 'text',
 				'search' => false,
 				'orderby' => false,
 			);
-		$this->fields_list['id_category'] = array(
+			$this->fields_list['id_category'] = array(
 				'title' => $this->l('Category'),
 				'type' => 'text',
 				'search' => false,
 				'orderby' => false,
 			);
 
-		$this->fields_list['hook'] = array(
+			$this->fields_list['hook'] = array(
 				'title' => $this->l('Enlace'),
 				'type' => 'text',
 				'search' => false,
 				'orderby' => false,
 			);
 
-		$helper = new HelperList();
-		$helper->shopLinkType = '';
-		$helper->simple_header = false;
-		$helper->identifier = 'id_banner';
-		$helper->actions = array('edit', 'delete');
-		$helper->show_toolbar = true;
-		$helper->imageType = 'jpg';
-		$helper->toolbar_btn['new'] = array(
-			'href' => AdminController::$currentIndex.'&configure='.$this->name.'&add'.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'),
-			'desc' => $this->l('Add new')
-		);
-		$helper->title = $this->displayName;
-		$helper->table = $this->name;
-		$helper->token = Tools::getAdminTokenLite('AdminModules');
-		$helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
-		$content = $this->getListContent($this->context->language->id);
-		return $helper->generateList($content, $this->fields_list);
+			$helper = new HelperList();
+			$helper->shopLinkType = '';
+			$helper->simple_header = false;
+			$helper->identifier = 'id_banner';
+			$helper->actions = array('edit', 'delete');
+			$helper->show_toolbar = true;
+			$helper->imageType = 'jpg';
+			$helper->toolbar_btn['new'] = array(
+				'href' => AdminController::$currentIndex.'&configure='.$this->name.'&add'.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'),
+				'desc' => $this->l('Add new')
+			);
+			$helper->title = $this->displayName;
+			$helper->table = $this->name;
+			$helper->token = Tools::getAdminTokenLite('AdminModules');
+			$helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
+			$content = $this->getListContent($this->context->language->id);
+			return $helper->generateList($content, $this->fields_list);
 	}
 
 	public function processSave()
 	{
-		$saved = false;
-		if ($id_banner = Tools::getValue('id_banner')) {
+			$saved = false;
+			if ($id_banner = Tools::getValue('id_banner')) {
 				$banner = new Banner((int)$id_banner);
 				if (isset($_REQUEST['savemoduloBanner'])) {
 						$banner->id_banner = Tools::getValue('id_banner');

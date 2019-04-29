@@ -59,7 +59,7 @@ class ModuloBanner extends Module
             $this->warning = $this->l('No name provided');
 		}
 	}
-
+	
     public function install()
     {
         include(dirname(__FILE__).'\sql\install.php');
@@ -98,8 +98,7 @@ class ModuloBanner extends Module
 					return $this->html;
 		}
 	}
-
-	
+    
 	protected function renderForm()
 	{
 			$image_size = "";
@@ -303,7 +302,7 @@ class ModuloBanner extends Module
 	
 
 	public function arrayHooks(){
-
+	
 		$hook = array();
 		
 
@@ -326,7 +325,7 @@ class ModuloBanner extends Module
 
 	public function getBanners()
 	{
-		$sql = 'SELECT ban.`id_banner`, ban.`id_category`,ban.`hook`,ca.`name` 
+		$sql = 'SELECT ban.`id_banner`, ban.`id_category`,ban.`hook`,ca.`name`
 			FROM `'._DB_PREFIX_.'banners` ban
 			LEFT JOIN `'._DB_PREFIX_.'category_lang` ca ON (ca.`id_category` = ban.`id_category`)
 			WHERE `id_lang` = '.$this->context->language->id;
@@ -406,16 +405,13 @@ class ModuloBanner extends Module
 	}
 	
 	public function posiciones($enlace,$id_categoria){
-
-		
-			$sql = 'SELECT `imagen`
-			FROM `'._DB_PREFIX_.'banners` 
-			WHERE `id_category` = '.(int)$id_categoria.' AND  `hook` = "'.$enlace.'"';
-
-
-			return Db::getInstance()->getRow($sql);
+		$sql = 'SELECT `imagen`
+		FROM `'._DB_PREFIX_.'banners`
+		WHERE `id_category` = '.(int)$id_categoria.' AND  `hook` = "'.$enlace.'"';
+		return Db::getInstance()->getRow($sql);
 	}
 
 }
+
 
 

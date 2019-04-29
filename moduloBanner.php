@@ -49,16 +49,18 @@ class ModuloBanner extends Module
         $this->displayName = $this->l('Banners');
         $this->description = $this->l('mi modulo del banner');
     
-		$this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
+        $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
 		
-		$this->fieldImageSettings = array(
+        $this->fieldImageSettings = array(
             'name' => 'image',
             'dir' => 'object'
         ); 
     	if (!Configuration::get('moduloBanner')) {
             $this->warning = $this->l('No name provided');
-        }
-    }
+		}
+	}
+
+	
 
     public function install()
     {
@@ -101,13 +103,11 @@ class ModuloBanner extends Module
 			$this->html .= $this->renderList();
 			return $this->html;
 		}
-
 	}
 
 	
 	protected function renderForm()
 	{
-
 		$image_size = "";
 		$image_url = "";	
 		$fields_form = array(
@@ -190,7 +190,6 @@ class ModuloBanner extends Module
 	protected function renderList()
 	{
 		$this->fields_list = array();
-		
 		$this->fields_list['id_banner'] = array(
 				'title' => $this->l('Id banner'),
 				'type' => 'text',
@@ -212,7 +211,6 @@ class ModuloBanner extends Module
 			);
 
 		$helper = new HelperList();
-		
 		$helper->shopLinkType = '';
 		$helper->simple_header = false;
 		$helper->identifier = 'id_banner';
@@ -223,82 +221,60 @@ class ModuloBanner extends Module
 			'href' => AdminController::$currentIndex.'&configure='.$this->name.'&add'.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'),
 			'desc' => $this->l('Add new')
 		);
-
-			
 		$helper->title = $this->displayName;
 		$helper->table = $this->name;
 		$helper->token = Tools::getAdminTokenLite('AdminModules');
 		$helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
 		$content = $this->getListContent($this->context->language->id);
-
-		
 		return $helper->generateList($content, $this->fields_list);
 	}
 
-
-	
 	public function processSave()
 	{
-		
 		$saved = false;
 		if ($id_banner = Tools::getValue('id_banner')){
-		
 			$banner = new Banner((int)$id_banner);
-			
 			if(isset($_REQUEST['savemoduloBanner']))
 			{
-
 				$banner->id_banner = Tools::getValue('id_banner');
 				$banner->id_category = Tools::getValue('id_category');
 				$banner->hook = Tools::getValue('hook');
-
 				$path = dirname(__FILE__).'/img/';
 				$newname = $_FILES['imagen']['name']; 
-
 				$banner->imagen = $newname;
 				$target = $path.$newname;
-				
 				move_uploaded_file($_FILES['imagen']['tmp_name'], $target);
-				
 				$miBanner = $this->posiciones($banner->hook ,$banner->id_category);
 				if(empty($miBanner)){
 					$saved = $banner->save();
 				}
 			}
-			
 		}
 		else{
 			$banner = new Banner((int)$id_banner);
-			
 			if(isset($_REQUEST['savemoduloBanner']))
 			{
-
 				$banner->id_banner = Tools::getValue('id_banner');
 				$banner->id_category = Tools::getValue('id_category');
 				$banner->hook = Tools::getValue('hook');
 				$path = dirname(__FILE__).'/img/';
 				$newname = $_FILES['imagen']['name']; 
-
 				$banner->imagen = $newname;
-			
 				$target = $path.$newname;
-				
 				move_uploaded_file($_FILES['imagen']['tmp_name'], $target);
-
 				$miBanner = $this->posiciones($banner->hook ,$banner->id_category);
 				if(empty($miBanner)){
 					$saved = $banner->save();
 				}
 			}
 		}
-		
 		return $saved;
 	}
+
 	
 	protected function getListContent()
 	{
 		$banners = $this->getBanners();
-		
 		for($i=0 ; $i < count($banners); $i++){
 			$banners[$i]['id_category'] = $banners[$i]['name'];
 		}
@@ -306,32 +282,31 @@ class ModuloBanner extends Module
 	}
 
 
+
 	
 	public function getFormValues()
 	{
-
 		$fields_value = array();
 		$id_banner = (int)Tools::getValue('id_banner');
-		
-
-			if ($id_banner)
-			{
-				$banner = new Banner((int)$id_banner);
-				$fields_value['id_category'] = $banner->id_category;
-				$fields_value['hook'] = $banner->hook;
-				$fields_value['imagen'] = $banner->imagen;
-				
-			}
-			else{
-				$fields_value['id_category'] = "";
-				$fields_value['hook'] = "";
-				$fields_value['imagen'] = "";
-			}
+		if ($id_banner)
+		{
+			$banner = new Banner((int)$id_banner);
+			$fields_value['id_category'] = $banner->id_category;
+			$fields_value['hook'] = $banner->hook;
+			$fields_value['imagen'] = $banner->imagen;
+		}
+		else{
+			$fields_value['id_category'] = "";
+			$fields_value['hook'] = "";
+			$fields_value['imagen'] = "";
+		}
 		$fields_value['id_banner'] = $id_banner;
 		
 
 		return $fields_value;
 	}
+
+
 
 
 	
@@ -374,10 +349,12 @@ class ModuloBanner extends Module
 
 	public function hookDisplayLeftColumn($params)
 	{
-		if(Tools::getValue('controller') == 'category'){
+		if(Tools::getValue('controller') == 'category')
+		{
 			$id_categoria = Tools::getValue('id_category');
 			$valor = $this->posiciones('izquierda',$id_categoria);
-			if(!empty($valor)){
+			if(!empty($valor))
+			{
 				$image = $valor['imagen'];
 				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/img/'. $image;
 				$this->smarty->assign(array(

@@ -69,9 +69,8 @@ class ModuloBanner extends Module
 		$this->registerHook('displayRightColumn') && 
 		$this->registerHook('displayTopColumn') && 
 		$this->registerHook('displayFooter') ;
-    
-       
-    }
+	}
+	
 
 	public function getContent()
 	{
@@ -81,7 +80,6 @@ class ModuloBanner extends Module
 		
 		if (Tools::isSubmit('savemoduloBanner'))
 		{
-			
 			if ($this->processSave()){
 				return $this->html . $this->renderList();
 			}
@@ -91,7 +89,6 @@ class ModuloBanner extends Module
 		}
 		elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner'))
 		{
-			
 			$this->html .= $this->renderForm();
 			return $this->html;
 		}
@@ -109,6 +106,7 @@ class ModuloBanner extends Module
 		}
 
 	}
+
 	
 	protected function renderForm()
 	{
@@ -191,6 +189,7 @@ class ModuloBanner extends Module
 		return $helper->generateForm(array(array('form' => $fields_form)));
 	}
 
+
 	protected function renderList()
 	{
 		$this->fields_list = array();
@@ -238,6 +237,7 @@ class ModuloBanner extends Module
 		
 		return $helper->generateList($content, $this->fields_list);
 	}
+
 
 	
 	public function processSave()
@@ -293,8 +293,6 @@ class ModuloBanner extends Module
 					$saved = $banner->save();
 				}
 			}
-			
-			
 		}
 		
 		return $saved;
@@ -309,6 +307,7 @@ class ModuloBanner extends Module
 		}
 		return $banners;
 	}
+
 
 	
 	public function getFormValues()
@@ -337,6 +336,7 @@ class ModuloBanner extends Module
 		return $fields_value;
 	}
 
+
 	
 
 	public function arrayHooks(){
@@ -360,6 +360,7 @@ class ModuloBanner extends Module
 	}
 
 
+
 	public function getBanners()
 	{
 		$sql = 'SELECT ban.`id_banner`, ban.`id_category`,ban.`hook`,ca.`name` 
@@ -370,20 +371,17 @@ class ModuloBanner extends Module
 
 			return Db::getInstance()->ExecuteS($sql); 	
 	}  
+
 	
 
 
 	public function hookDisplayLeftColumn($params)
 	{
-		
-		
 		if(Tools::getValue('controller') == 'category'){
-
 			$id_categoria = Tools::getValue('id_category');
 			$valor = $this->posiciones('izquierda',$id_categoria);
 			if(!empty($valor)){
 				$image = $valor['imagen'];
-			
 				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/img/'. $image;
 				$this->smarty->assign(array(
 					'image' => $image,
@@ -391,15 +389,12 @@ class ModuloBanner extends Module
 				));
 				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
 			}
-			
-		}
-		
-		
+		}	
 	}
+
 
 	public function hookDisplayRightColumn($params){
 		if(Tools::getValue('controller') == 'category'){
-
 			$id_categoria = Tools::getValue('id_category');
 			$valor = $this->posiciones('derecha',$id_categoria);
 			if(!empty($valor)){
@@ -408,18 +403,14 @@ class ModuloBanner extends Module
 				$this->smarty->assign(array(
 					'image' => $image,
 					'path' => $path
-				
 				));
 				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
 			}
-			
 		}
-		
 	}
 
 	public function hookDisplayTopColumn($params){
 		if(Tools::getValue('controller') == 'category'){
-
 			$id_categoria = Tools::getValue('id_category');
 			$valor = $this->posiciones('arriba',$id_categoria);
 			if(!empty($valor)){
@@ -428,15 +419,10 @@ class ModuloBanner extends Module
 				$this->smarty->assign(array(
 					'image' => $image,
 					'path' => $path
-				
 				));
 				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
 			}
-			
-			
 		}
-		
-	
 	}
 
 	public function HookDisplayFooter($params){
@@ -450,14 +436,12 @@ class ModuloBanner extends Module
 				$this->smarty->assign(array(
 					'image' => $image,
 					'path' => $path
-				
 				));
 				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
 			}
-			
 		}
-		
 	}
+	
 	public function posiciones($enlace,$id_categoria){
 
 		
@@ -467,10 +451,8 @@ class ModuloBanner extends Module
 
 
 			return Db::getInstance()->getRow($sql);
-		
-		
-	
 	}
-	
-	
+
 }
+
+

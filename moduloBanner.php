@@ -54,8 +54,8 @@ class ModuloBanner extends Module
         $this->fieldImageSettings = array(
             'name' => 'image',
             'dir' => 'object',
-        ); 
-    	if (!Configuration::get('moduloBanner')) {
+        );
+    	if (!Configuration::get('moduloBanner')){
             $this->warning = $this->l('No name provided');
 		}
 	}
@@ -63,10 +63,10 @@ class ModuloBanner extends Module
     public function install()
     {
         include(dirname(__FILE__).'\sql\install.php');
-        return parent::install() && 
-		$this->registerHook('displayLeftColumn') && 
-		$this->registerHook('displayRightColumn') && 
-		$this->registerHook('displayTopColumn') && 
+        return parent::install() &&
+		$this->registerHook('displayLeftColumn') &&
+		$this->registerHook('displayRightColumn') &&
+		$this->registerHook('displayTopColumn') &&
 		$this->registerHook('displayFooter');
 	}
 	
@@ -107,7 +107,7 @@ class ModuloBanner extends Module
 	protected function renderForm()
 	{
 			$image_size = "";
-			$image_url = "";	
+			$image_url = "";
 			$fields_form = array(
 			'tinymce' => true,
 			'legend' => array(
@@ -238,7 +238,7 @@ class ModuloBanner extends Module
 				$banner->id_category = Tools::getValue('id_category');
 				$banner->hook = Tools::getValue('hook');
 				$path = dirname(__FILE__).'/img/';
-				$newname = $_FILES['imagen']['name']; 
+				$newname = $_FILES['imagen']['name'];
 				$banner->imagen = $newname;
 				$target = $path.$newname;
 				move_uploaded_file($_FILES['imagen']['tmp_name'], $target);
@@ -256,7 +256,7 @@ class ModuloBanner extends Module
 				$banner->id_category = Tools::getValue('id_category');
 				$banner->hook = Tools::getValue('hook');
 				$path = dirname(__FILE__).'/img/';
-				$newname = $_FILES['imagen']['name']; 
+				$newname = $_FILES['imagen']['name'];
 				$banner->imagen = $newname;
 				$target = $path.$newname;
 				move_uploaded_file($_FILES['imagen']['tmp_name'], $target);
@@ -339,8 +339,9 @@ class ModuloBanner extends Module
 			WHERE `id_lang` = '.$this->context->language->id;
 
 
-			return Db::getInstance()->ExecuteS($sql); 	
-	}  
+			return Db::getInstance()->ExecuteS($sql);
+	}
+
 
 	
 
@@ -361,7 +362,7 @@ class ModuloBanner extends Module
 				));
 				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
 			}
-		}	
+		}
 	}
 
 

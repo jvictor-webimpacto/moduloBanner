@@ -119,9 +119,9 @@ class ModuloBanner extends Module
                         'id' => 'id_category',
                         'name' => 'name'
                     )
-				),
+                ),
                 'imagen' => array(
-					'type' => 'file',
+                    'type' => 'file',
                     'label' => $this->l('Picture'),
                     'lang' => true,
                     'name' => 'imagen',
@@ -198,7 +198,7 @@ class ModuloBanner extends Module
             $helper->shopLinkType = '';
             $helper->simple_header = false;
             $helper->identifier = 'id_banner';
-			$helper->actions = array('edit', 'delete');
+            $helper->actions = array('edit', 'delete');
             $helper->show_toolbar = true;
             $helper->imageType = 'jpg';
             $helper->toolbar_btn['new'] = array(
@@ -219,7 +219,7 @@ class ModuloBanner extends Module
             $saved = false;
             if ($id_banner = Tools::getValue('id_banner')) {
                 $banner = new Banner((int)$id_banner);
-                if (isset($_REQUEST['savemoduloBanner'])) {
+                    if (isset($_REQUEST['savemoduloBanner'])) {
                     $banner->id_banner = Tools::getValue('id_banner');
                     $banner->id_category = Tools::getValue('id_category');
                     $banner->hook = Tools::getValue('hook');

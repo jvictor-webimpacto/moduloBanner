@@ -3,7 +3,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clearfix" >
         <div class="row row-flex">
             <div >
-                <img src="{$path}" class="img-responsive center-block" />
+                <img src="{$path}" class="img-responsive center-block {$data|escape:'htmlall':'UTF-8'}" />
              </div>
         </div>
     </div>

@@ -253,7 +253,7 @@ class ModuloBanner extends Module
 				move_uploaded_file($_FILES['imagen']['tmp_name'], $target);
 				$miBanner = $this->posiciones($banner->hook ,$banner->id_category);
 				if (empty($miBanner)) {
-						$saved = $banner->save();
+					$saved = $banner->save();
 				}
 			}
 		}
@@ -264,7 +264,7 @@ class ModuloBanner extends Module
 	protected function getListContent()
 	{
 		$banners = $this->getBanners();
-		for ($i=0 ; $i < count($banners); $i++) {
+		for ( $i=0 ; $i < count($banners); $i++) {
 			$banners[$i]['id_category'] = $banners[$i]['name'];
 		}
 		return $banners;
@@ -374,7 +374,7 @@ class ModuloBanner extends Module
 		}
 	}
 
-	public function HookDisplayFooter($params)
+	public function hookDisplayFooter($params)
 	{
 		if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
@@ -391,14 +391,13 @@ class ModuloBanner extends Module
 		}
 	}
 	
-	public function posiciones($enlace,$id_categoria)
+	public function posiciones($enlace, $id_categoria)
 	{
 		$sql = 'SELECT `imagen`
 		FROM `'._DB_PREFIX_.'banners`
 		WHERE `id_category` = '.(int)$id_categoria.' AND  `hook` = "'.$enlace.'"';
 		return Db::getInstance()->getRow($sql);
 	}
-
 }
 
 

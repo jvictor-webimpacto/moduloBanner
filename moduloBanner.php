@@ -40,14 +40,14 @@ class ModuloBanner extends Module
         $this->tab = 'front_office_features';
         $this->version = '1.0.0';
         $this->author = 'Javier';
-		$this->need_instance = 0;
-		$this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
-		$this->bootstrap = true;
-		parent::__construct();
-		$this->displayName = $this->l('Banners');
+        $this->need_instance = 0;
+        $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
+        $this->bootstrap = true;
+        parent::__construct();
+        $this->displayName = $this->l('Banners');
         $this->description = $this->l('mi modulo del banner');
-		$this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
-		$this->fieldImageSettings = array(
+        $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
+        $this->fieldImageSettings = array(
             'name' => 'image',
             'dir' => 'object',
         );

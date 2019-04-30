@@ -276,7 +276,6 @@ class ModuloBanner extends Module
         }
         $fields_value['id_banner'] = $id_banner;
         
-
         return $fields_value;
     }
     
@@ -284,7 +283,6 @@ class ModuloBanner extends Module
     {
         
         $hook = array();
-        
         $hook[0]['hooks'] = 'arriba';
         $hook[0]['firstname'] = 'arriba';
         $hook[1]['hooks'] = 'derecha';

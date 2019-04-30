@@ -234,7 +234,7 @@ class ModuloBanner extends Module
 					$banner->imagen = $newname;
 					$target = $path.$newname;
 					move_uploaded_file($_FILES['imagen']['tmp_name'], $target);
-					$miBanner = $this->posiciones($banner->hook ,$banner->id_category);
+					$miBanner = $this->posiciones($banner->hook , $banner->id_category);
 						if (empty($miBanner)) {
 							$saved = $banner->save();
 						}
@@ -251,7 +251,7 @@ class ModuloBanner extends Module
 				$banner->imagen = $newname;
 				$target = $path.$newname;
 				move_uploaded_file($_FILES['imagen']['tmp_name'], $target);
-				$miBanner = $this->posiciones($banner->hook ,$banner->id_category);
+				$miBanner = $this->posiciones($banner->hook , $banner->id_category);
 				if (empty($miBanner)) {
 					$saved = $banner->save();
 				}
@@ -324,7 +324,7 @@ class ModuloBanner extends Module
 	{
 		if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
-			$valor = $this->posiciones('izquierda',$id_categoria);
+			$valor = $this->posiciones('izquierda', $id_categoria);
 			if (!empty($valor)) {
 				$image = $valor['imagen'];
 				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
@@ -332,7 +332,7 @@ class ModuloBanner extends Module
 					'image' => $image,
 					'path' => $path
 				));
-				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
+				return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
 			}
 		}
 	}
@@ -342,7 +342,7 @@ class ModuloBanner extends Module
 	{
 		if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
-			$valor = $this->posiciones('derecha',$id_categoria);
+			$valor = $this->posiciones('derecha', $id_categoria);
 			if (!empty($valor)) {
 				$image = $valor['imagen'];
 				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
@@ -350,7 +350,7 @@ class ModuloBanner extends Module
 					'image' => $image,
 					'path' => $path
 				));
-				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
+				return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
 			}
 		}
 	}
@@ -359,7 +359,7 @@ class ModuloBanner extends Module
 	{
 		if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
-			$valor = $this->posiciones('arriba',$id_categoria);
+			$valor = $this->posiciones('arriba', $id_categoria);
 			if (!empty($valor)) {
 				$image = $valor['imagen'];
 				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
@@ -367,7 +367,7 @@ class ModuloBanner extends Module
 					'image' => $image,
 					'path' => $path
 				));
-				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
+				return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
 			}
 		}
 	}
@@ -376,7 +376,7 @@ class ModuloBanner extends Module
 	{
 		if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
-			$valor = $this->posiciones('abajo',$id_categoria);
+			$valor = $this->posiciones('abajo', $id_categoria);
 			if (!empty($valor)) {
 				$image = $valor['imagen'];
 				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
@@ -384,7 +384,7 @@ class ModuloBanner extends Module
 					'image' => $image,
 					'path' => $path
 				));
-				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
+				return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
 			}
 		}
 	}

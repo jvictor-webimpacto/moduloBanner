@@ -51,12 +51,12 @@ class ModuloBanner extends Module
             'name' => 'image',
             'dir' => 'object',
         );
-		
+        
         if (!Configuration::get('moduloBanner')) {
             $this->warning = $this->l('No name provided');
         }
     }
-	
+    
     public function install()
     {
         include(dirname(__FILE__).'\sql\install.php');
@@ -66,8 +66,7 @@ class ModuloBanner extends Module
         $this->registerHook('displayTopColumn') &&
         $this->registerHook('displayFooter');
     }
-	
-
+    
     public function getContent()
     {
         $id_banner = (int)Tools::getValue('id_banner');
@@ -87,8 +86,7 @@ class ModuloBanner extends Module
             $this->_clearCache('category.tpl');
             Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.
             Tools::getAdminTokenLite('AdminModules'));
-        }
-        else {
+        } else {
             $this->html .= $this->renderList();
             return $this->html;
         }
@@ -231,8 +229,7 @@ class ModuloBanner extends Module
                         $saved = $banner->save();
                 }
             }
-        }
-        else {
+        } else {
             $banner = new Banner((int)$id_banner);
             if (isset($_REQUEST['savemoduloBanner'])) {
                 $banner->id_banner = Tools::getValue('id_banner');
@@ -251,8 +248,8 @@ class ModuloBanner extends Module
         }
         return $saved;
     }
-
-	
+    
+    
     protected function getListContent()
     {
         $banners = $this->getBanners();
@@ -260,9 +257,9 @@ class ModuloBanner extends Module
             $banners[$i]['id_category'] = $banners[$i]['name'];
         }
         return $banners;
-    }
-
-	
+	}
+    
+    
     public function getFormValues()
     {
         $fields_value = array();
@@ -272,8 +269,7 @@ class ModuloBanner extends Module
             $fields_value['id_category'] = $banner->id_category;
             $fields_value['hook'] = $banner->hook;
             $fields_value['imagen'] = $banner->imagen;
-        }
-        else {
+        } else {
             $fields_value['id_category'] = "";
             $fields_value['hook'] = "";
             $fields_value['imagen'] = "";
@@ -283,7 +279,7 @@ class ModuloBanner extends Module
 
         return $fields_value;
     }
-
+    
     public function arrayHooks()
     {
 	
@@ -300,7 +296,7 @@ class ModuloBanner extends Module
 		
         return $hook;
     }
-
+    
     public function getBanners()
     {
         $sql = 'SELECT ban.`id_banner`, ban.`id_category`,ban.`hook`,ca.`name`
@@ -311,7 +307,7 @@ class ModuloBanner extends Module
 
         return Db::getInstance()->ExecuteS($sql);
     }
-
+    
     public function hookDisplayLeftColumn($params)
     {
         if (Tools::getValue('controller') == 'category') {

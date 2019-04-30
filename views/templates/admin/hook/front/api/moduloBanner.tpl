@@ -1,5 +1,5 @@
 <head>
-	<title>{$meta_title|escape:'htmlall':'UTF-8'}</title>
+	<title>{$data|escape:'htmlall':'UTF-8'}</title>
 </head>
 <body>
     {if $image}
@@ -12,4 +12,4 @@
             </div>
         </div>
     {/if}
-</body>
+

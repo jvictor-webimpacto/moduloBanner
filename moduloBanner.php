@@ -70,8 +70,8 @@ class ModuloBanner extends Module
 
     public function getContent()
     {
-		$id_banner = (int)Tools::getValue('id_banner');
-		$this->html = "";
+        $id_banner = (int)Tools::getValue('id_banner');
+        $this->html = "";
         if (Tools::isSubmit('savemoduloBanner')) {
 			if ($this->processSave()) {
 				return $this->html . $this->renderList();
@@ -98,9 +98,9 @@ class ModuloBanner extends Module
     
     protected function renderForm()
     {
-		$image_size = "";
-		$image_url = "";
-		$fields_form = array(
+        $image_size = "";
+        $image_url = "";
+        $fields_form = array(
 			'tinymce' => true,
 			'legend' => array(
 				'title' => $this->l('Este es mi formulario del banner'),
@@ -156,7 +156,7 @@ class ModuloBanner extends Module
 					'icon' => 'process-icon-back'
 				)
 			)
-		);
+        );
 
 
 			$helper = new HelperForm();
@@ -254,83 +254,83 @@ class ModuloBanner extends Module
 					}
 				}
 			}
-		return $saved;
+        return $saved;
     }
 
 	
     protected function getListContent()
     {
-		$banners = $this->getBanners();
+        $banners = $this->getBanners();
         for ($i=0; $i < count($banners); $i++) {
 			$banners[$i]['id_category'] = $banners[$i]['name'];
         }
-		return $banners;
+        return $banners;
     }
 
 	
     public function getFormValues()
     {
-		$fields_value = array();
-		$id_banner = (int)Tools::getValue('id_banner');
+        $fields_value = array();
+        $id_banner = (int)Tools::getValue('id_banner');
         if ($id_banner) {
-			$banner = new Banner((int)$id_banner);
-			$fields_value['id_category'] = $banner->id_category;
-			$fields_value['hook'] = $banner->hook;
-			$fields_value['imagen'] = $banner->imagen;
+            $banner = new Banner((int)$id_banner);
+            $fields_value['id_category'] = $banner->id_category;
+            $fields_value['hook'] = $banner->hook;
+            $fields_value['imagen'] = $banner->imagen;
         }
         else {
-			$fields_value['id_category'] = "";
-			$fields_value['hook'] = "";
-			$fields_value['imagen'] = "";
+            $fields_value['id_category'] = "";
+            $fields_value['hook'] = "";
+            $fields_value['imagen'] = "";
         }
-		$fields_value['id_banner'] = $id_banner;
+        $fields_value['id_banner'] = $id_banner;
 		
 
-		return $fields_value;
+        return $fields_value;
     }
 
     public function arrayHooks()
     {
 	
-		$hook = array();
+        $hook = array();
 		
-		$hook[0]['hooks'] = 'arriba';
-		$hook[0]['firstname'] = 'arriba';
-		$hook[1]['hooks'] = 'derecha';
-		$hook[1]['firstname'] = 'derecha';
-		$hook[2]['hooks'] = 'abajo';
-		$hook[2]['firstname'] = 'abajo';
-		$hook[3]['hooks'] = 'izquierda';
-		$hook[3]['firstname'] = 'izquierda';
+        $hook[0]['hooks'] = 'arriba';
+        $hook[0]['firstname'] = 'arriba';
+        $hook[1]['hooks'] = 'derecha';
+        $hook[1]['firstname'] = 'derecha';
+        $hook[2]['hooks'] = 'abajo';
+        $hook[2]['firstname'] = 'abajo';
+        $hook[3]['hooks'] = 'izquierda';
+        $hook[3]['firstname'] = 'izquierda';
 		
-		return $hook;
+        return $hook;
     }
 
     public function getBanners()
     {
-		$sql = 'SELECT ban.`id_banner`, ban.`id_category`,ban.`hook`,ca.`name`
+        $sql = 'SELECT ban.`id_banner`, ban.`id_category`,ban.`hook`,ca.`name`
 			FROM `'._DB_PREFIX_.'banners` ban
 			LEFT JOIN `'._DB_PREFIX_.'category_lang` ca ON (ca.`id_category` = ban.`id_category`)
 			WHERE `id_lang` = '.$this->context->language->id;
 
 
-			return Db::getInstance()->ExecuteS($sql);
+        return Db::getInstance()->ExecuteS($sql);
     }
 
     public function hookDisplayLeftColumn($params)
     {
         if (Tools::getValue('controller') == 'category') {
-			$id_categoria = Tools::getValue('id_category');
-			$valor = $this->posiciones('izquierda', $id_categoria);
-			if (!empty($valor)) {
-				$image = $valor['imagen'];
-				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
-				$this->smarty->assign(array(
+            $id_categoria = Tools::getValue('id_category');
+            $valor = $this->posiciones('izquierda', $id_categoria);
+            if (!empty($valor)) {
+                $image = $valor['imagen'];
+                $path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
+                $this->smarty->assign(array(
 					'image' => $image,
 					'path' => $path
-				));
-				return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
-			}
+                ));
+                return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
+            }
         }
     }
 
@@ -338,59 +338,59 @@ class ModuloBanner extends Module
     public function hookDisplayRightColumn($params)
     {
         if (Tools::getValue('controller') == 'category') {
-			$id_categoria = Tools::getValue('id_category');
-			$valor = $this->posiciones('derecha', $id_categoria);
-			if (!empty($valor)) {
-				$image = $valor['imagen'];
-				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
-				$this->smarty->assign(array(
+            $id_categoria = Tools::getValue('id_category');
+            $valor = $this->posiciones('derecha', $id_categoria);
+            if (!empty($valor)) {
+                $image = $valor['imagen'];
+                $path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
+                $this->smarty->assign(array(
 					'image' => $image,
 					'path' => $path
-				));
-				return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
-			}
+                ));
+                return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
+            }
         }
     }
 
     public function hookDisplayTopColumn($params)
     {
         if (Tools::getValue('controller') == 'category') {
-			$id_categoria = Tools::getValue('id_category');
-			$valor = $this->posiciones('arriba', $id_categoria);
-			if (!empty($valor)) {
-				$image = $valor['imagen'];
-				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
-				$this->smarty->assign(array(
+            $id_categoria = Tools::getValue('id_category');
+            $valor = $this->posiciones('arriba', $id_categoria);
+            if (!empty($valor)) {
+                $image = $valor['imagen'];
+                $path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
+                $this->smarty->assign(array(
 					'image' => $image,
 					'path' => $path
-				));
-				return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
-			}
+                ));
+                return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
+            }
         }
     }
 
     public function hookDisplayFooter($params)
     {
         if (Tools::getValue('controller') == 'category') {
-			$id_categoria = Tools::getValue('id_category');
-			$valor = $this->posiciones('abajo', $id_categoria);
-			if (!empty($valor)) {
-				$image = $valor['imagen'];
-				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
-				$this->smarty->assign(array(
+            $id_categoria = Tools::getValue('id_category');
+            $valor = $this->posiciones('abajo', $id_categoria);
+            if (!empty($valor)) {
+                $image = $valor['imagen'];
+                $path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
+                $this->smarty->assign(array(
 					'image' => $image,
 					'path' => $path
-				));
-				return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
-			}
+                ));
+                return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
+            }
         }
     }
 	
     public function posiciones($enlace, $id_categoria)
     {
-		$sql = 'SELECT `imagen`
-		FROM `'._DB_PREFIX_.'banners`
-		WHERE `id_category` = '.(int)$id_categoria.' AND  `hook` = "'.$enlace.'"';
-		return Db::getInstance()->getRow($sql);
+        $sql = 'SELECT `imagen`
+        FROM `'._DB_PREFIX_.'banners`
+        WHERE `id_category` = '.(int)$id_categoria.' AND  `hook` = "'.$enlace.'"';
+        return Db::getInstance()->getRow($sql);
     }
 }

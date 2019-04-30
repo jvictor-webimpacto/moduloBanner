@@ -34,7 +34,7 @@ class ModuloBanner extends Module
 {
     public function __construct()
     {
-        $this->name = 'modulobanner';
+        $this->name = 'moduloBanner';
         $this->tab = 'front_office_features';
         $this->version = '1.0.0';
         $this->author = 'Javier';
@@ -50,7 +50,7 @@ class ModuloBanner extends Module
             'dir' => 'object',
         );
         
-        if (!Configuration::get('modulobanner')) {
+        if (!Configuration::get('moduloBanner')) {
             $this->warning = $this->l('No name provided');
         }
     }

@@ -234,7 +234,6 @@ class ModuloBanner extends Module
                 $path = dirname(__FILE__).'/img/';
                 $newname = $_FILES['imagen']['name'];
                 $banner->imagen = $newname;
-                $target = $path.$newname;
                 $miBanner = $this->posiciones($banner->hook, $banner->id_category);
                 if (empty($miBanner)) {
                     $saved = $banner->save();

@@ -223,7 +223,7 @@ class ModuloBanner extends Module
                     $banner->id_banner = Tools::getValue('id_banner');
                     $banner->id_category = Tools::getValue('id_category');
                     $banner->hook = Tools::getValue('hook');
-					$path = dirname(__FILE__).'/img/';
+                    $path = dirname(__FILE__).'/img/';
                     $newname = $_FILES['imagen']['name'];
                     $banner->imagen = $newname;
                     $target = $path.$newname;
@@ -231,7 +231,7 @@ class ModuloBanner extends Module
                     $miBanner = $this->posiciones($banner->hook, $banner->id_category);
                     if (empty($miBanner)) {
                         $saved = $banner->save();
-					}
+                    }
                 }
             }
             else {
@@ -323,8 +323,8 @@ class ModuloBanner extends Module
                 $image = $valor['imagen'];
                 $path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
                 $this->smarty->assign(array(
-					'image' => $image,
-					'path' => $path
+                    'image' => $image,
+                    'path' => $path
                 ));
                 return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
             }
@@ -341,8 +341,8 @@ class ModuloBanner extends Module
                 $image = $valor['imagen'];
                 $path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
                 $this->smarty->assign(array(
-					'image' => $image,
-					'path' => $path
+                    'image' => $image,
+                    'path' => $path
                 ));
                 return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
             }
@@ -358,8 +358,8 @@ class ModuloBanner extends Module
                 $image = $valor['imagen'];
                 $path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
                 $this->smarty->assign(array(
-					'image' => $image,
-					'path' => $path
+                    'image' => $image,
+                    'path' => $path
                 ));
                 return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
             }
@@ -375,8 +375,8 @@ class ModuloBanner extends Module
                 $image = $valor['imagen'];
                 $path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
                 $this->smarty->assign(array(
-					'image' => $image,
-					'path' => $path
+                    'image' => $image,
+                    'path' => $path
                 ));
                 return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
             }

@@ -86,11 +86,12 @@ class ModuloBanner extends Module
 			$this->html .= $this->renderForm();
 			return $this->html;
 		} 
-		else if (Tools::isSubmit('deletemoduloBanner')) {
+		elseif (Tools::isSubmit('deletemoduloBanner')) {
 			$banner = new Banner((int)$id_banner);
 			$banner->delete();
 			$this->_clearCache('category.tpl');
-			Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'));
+			Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.
+			Tools::getAdminTokenLite('AdminModules'));
 		}
 		else {
 			$this->html .= $this->renderList();
@@ -152,7 +153,8 @@ class ModuloBanner extends Module
 			),
 			'buttons' => array(
 				array(
-					'href' => AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'),
+					'href' => AdminController::$currentIndex.'&configure='.$this->name.'&token='.
+					Tools::getAdminTokenLite('AdminModules'),
 					'title' => $this->l('Back to list'),
 					'icon' => 'process-icon-back'
 				)
@@ -205,7 +207,8 @@ class ModuloBanner extends Module
 			$helper->show_toolbar = true;
 			$helper->imageType = 'jpg';
 			$helper->toolbar_btn['new'] = array(
-				'href' => AdminController::$currentIndex.'&configure='.$this->name.'&add'.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'),
+				'href' => AdminController::$currentIndex.'&configure='.$this->name.'&add'.$this->name.'&token='.
+				Tools::getAdminTokenLite('AdminModules'),
 				'desc' => $this->l('Add new')
 			);
 			$helper->title = $this->displayName;

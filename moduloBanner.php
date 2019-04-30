@@ -217,7 +217,6 @@ class ModuloBanner extends Module
                 $banner->id_banner = Tools::getValue('id_banner');
                 $banner->id_category = Tools::getValue('id_category');
                 $banner->hook = Tools::getValue('hook');
-                $path = dirname(__FILE__).'/img/';
                 $newname = $_FILES['imagen']['name'];
                 $banner->imagen = $newname;
                 $miBanner = $this->posiciones($banner->hook, $banner->id_category);
@@ -231,7 +230,6 @@ class ModuloBanner extends Module
                 $banner->id_banner = Tools::getValue('id_banner');
                 $banner->id_category = Tools::getValue('id_category');
                 $banner->hook = Tools::getValue('hook');
-                $path = dirname(__FILE__).'/img/';
                 $newname = $_FILES['imagen']['name'];
                 $banner->imagen = $newname;
                 $miBanner = $this->posiciones($banner->hook, $banner->id_category);

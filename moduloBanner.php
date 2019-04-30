@@ -75,45 +75,43 @@ class ModuloBanner extends Module
 		$id_banner = (int)Tools::getValue('id_banner');
 		$this->html = "";
 		if (Tools::isSubmit('savemoduloBanner')) {
-				if ($this->processSave()) {
-					return $this->html . $this->renderList();
-				}
-				else {
-					return $this->html . $this->renderForm();
-				}
+			if ($this->processSave()) {
+				return $this->html . $this->renderList();
+			}
+			else {
+				return $this->html . $this->renderForm();
+			}
 		} 
 		elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
-				$this->html .= $this->renderForm();
-				return $this->html;
+			$this->html .= $this->renderForm();
+			return $this->html;
 		} 
 		else if (Tools::isSubmit('deletemoduloBanner')) {
-				$banner = new Banner((int)$id_banner);
-				$banner->delete();
-				$this->_clearCache('category.tpl');
-				Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'));
+			$banner = new Banner((int)$id_banner);
+			$banner->delete();
+			$this->_clearCache('category.tpl');
+			Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'));
 		}
 		else {
-				$this->html .= $this->renderList();
-				return $this->html;
+			$this->html .= $this->renderList();
+			return $this->html;
 		}
 	}
     
 	protected function renderForm()
 	{
-			$image_size = "";
-			$image_url = "";
-			$fields_form = array(
+		$image_size = "";
+		$image_url = "";
+		$fields_form = array(
 			'tinymce' => true,
 			'legend' => array(
 				'title' => $this->l('Este es mi formulario del banner'),
 			),
 			'input' => array(
-
-				'id_banner' => array(
+					'id_banner' => array(
 					'type' => 'hidden',
 					'name' => 'id_banner'
 				),
-				
 				array(
 					'type' => 'select',
 					'label' => $this->l('Category'),
@@ -134,7 +132,6 @@ class ModuloBanner extends Module
 					'image' => $image_url ? $image_url : false,
 					'cols' => 40,
 					'rows' => 10,
-					
 				),
 				array(
 
@@ -171,8 +168,6 @@ class ModuloBanner extends Module
 			$helper->toolbar_scroll = true;
 			$helper->title = $this->displayName;
 			$helper->submit_action = 'savemoduloBanner';
-
-		
 			$helper->fields_value = $this->getFormValues();
 
 			return $helper->generateForm(array(array('form' => $fields_form)));
@@ -227,23 +222,6 @@ class ModuloBanner extends Module
 			if ($id_banner = Tools::getValue('id_banner')) {
 				$banner = new Banner((int)$id_banner);
 				if (isset($_REQUEST['savemoduloBanner'])) {
-						$banner->id_banner = Tools::getValue('id_banner');
-						$banner->id_category = Tools::getValue('id_category');
-						$banner->hook = Tools::getValue('hook');
-						$path = dirname(__FILE__).'/img/';
-						$newname = $_FILES['imagen']['name'];
-						$banner->imagen = $newname;
-						$target = $path.$newname;
-						move_uploaded_file($_FILES['imagen']['tmp_name'], $target);
-						$miBanner = $this->posiciones($banner->hook ,$banner->id_category);
-						if (empty($miBanner)) {
-								$saved = $banner->save();
-						}
-				}
-		}
-		else{
-			$banner = new Banner((int)$id_banner);
-			if (isset($_REQUEST['savemoduloBanner'])) {
 					$banner->id_banner = Tools::getValue('id_banner');
 					$banner->id_category = Tools::getValue('id_category');
 					$banner->hook = Tools::getValue('hook');
@@ -253,9 +231,26 @@ class ModuloBanner extends Module
 					$target = $path.$newname;
 					move_uploaded_file($_FILES['imagen']['tmp_name'], $target);
 					$miBanner = $this->posiciones($banner->hook ,$banner->id_category);
-					if (empty($miBanner)) {
+						if (empty($miBanner)) {
 							$saved = $banner->save();
-					}
+						}
+				}
+		}
+		else{
+			$banner = new Banner((int)$id_banner);
+			if (isset($_REQUEST['savemoduloBanner'])) {
+				$banner->id_banner = Tools::getValue('id_banner');
+				$banner->id_category = Tools::getValue('id_category');
+				$banner->hook = Tools::getValue('hook');
+				$path = dirname(__FILE__).'/img/';
+				$newname = $_FILES['imagen']['name'];
+				$banner->imagen = $newname;
+				$target = $path.$newname;
+				move_uploaded_file($_FILES['imagen']['tmp_name'], $target);
+				$miBanner = $this->posiciones($banner->hook ,$banner->id_category);
+				if (empty($miBanner)) {
+						$saved = $banner->save();
+				}
 			}
 		}
 		return $saved;
@@ -266,7 +261,7 @@ class ModuloBanner extends Module
 	{
 		$banners = $this->getBanners();
 		for($i=0 ; $i < count($banners); $i++) {
-				$banners[$i]['id_category'] = $banners[$i]['name'];
+			$banners[$i]['id_category'] = $banners[$i]['name'];
 		}
 		return $banners;
 	}
@@ -279,16 +274,16 @@ class ModuloBanner extends Module
 		$fields_value = array();
 		$id_banner = (int)Tools::getValue('id_banner');
 		if ($id_banner) {
-				$banner = new Banner((int)$id_banner);
-				$fields_value['id_category'] = $banner->id_category;
-				$fields_value['hook'] = $banner->hook;
-				$fields_value['imagen'] = $banner->imagen;
+			$banner = new Banner((int)$id_banner);
+			$fields_value['id_category'] = $banner->id_category;
+			$fields_value['hook'] = $banner->hook;
+			$fields_value['imagen'] = $banner->imagen;
 		}
 		else{
-				$fields_value['id_category'] = "";
-				$fields_value['hook'] = "";
-				$fields_value['imagen'] = "";
-			}
+			$fields_value['id_category'] = "";
+			$fields_value['hook'] = "";
+			$fields_value['imagen'] = "";
+		}
 		$fields_value['id_banner'] = $id_banner;
 		
 
@@ -304,7 +299,6 @@ class ModuloBanner extends Module
 	
 		$hook = array();
 		
-
 		$hook[0]['hooks'] = 'arriba';
 		$hook[0]['firstname'] = 'arriba';
 		$hook[1]['hooks'] = 'derecha';
@@ -314,13 +308,8 @@ class ModuloBanner extends Module
 		$hook[3]['hooks'] = 'izquierda';
 		$hook[3]['firstname'] = 'izquierda';
 		
-		
-		
-		
 		return $hook;
 	}
-
-
 
 	public function getBanners()
 	{
@@ -332,10 +321,6 @@ class ModuloBanner extends Module
 
 			return Db::getInstance()->ExecuteS($sql);
 	}
-
-
-	
-
 
 	public function hookDisplayLeftColumn($params)
 	{
@@ -356,51 +341,51 @@ class ModuloBanner extends Module
 
 
 	public function hookDisplayRightColumn($params){
-			if (Tools::getValue('controller') == 'category') {
-				$id_categoria = Tools::getValue('id_category');
-				$valor = $this->posiciones('derecha',$id_categoria);
-				if (!empty($valor)) {
-					$image = $valor['imagen'];
-					$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/img/'. $image;
-					$this->smarty->assign(array(
+		if (Tools::getValue('controller') == 'category') {
+			$id_categoria = Tools::getValue('id_category');
+			$valor = $this->posiciones('derecha',$id_categoria);
+			if (!empty($valor)) {
+				$image = $valor['imagen'];
+				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/img/'. $image;
+				$this->smarty->assign(array(
 					'image' => $image,
 					'path' => $path
 				));
 				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
-				}
 			}
+		}
 	}
 
 	public function hookDisplayTopColumn($params){
-			if (Tools::getValue('controller') == 'category') {
-					$id_categoria = Tools::getValue('id_category');
-					$valor = $this->posiciones('arriba',$id_categoria);
-					if (!empty($valor)) {
-						$image = $valor['imagen'];
-						$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/img/'. $image;
-						$this->smarty->assign(array(
-							'image' => $image,
-							'path' => $path
-						));
-					return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
+		if (Tools::getValue('controller') == 'category') {
+			$id_categoria = Tools::getValue('id_category');
+			$valor = $this->posiciones('arriba',$id_categoria);
+			if (!empty($valor)) {
+				$image = $valor['imagen'];
+				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/img/'. $image;
+				$this->smarty->assign(array(
+					'image' => $image,
+					'path' => $path
+				));
+				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
 			}
 		}
 	}
 
 	public function HookDisplayFooter($params){
 			if (Tools::getValue('controller') == 'category') {
-					$id_categoria = Tools::getValue('id_category');
-					$valor = $this->posiciones('abajo',$id_categoria);
-					if (!empty($valor)) {
-						$image = $valor['imagen'];
-						$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/img/'. $image;
-						$this->smarty->assign(array(
-							'image' => $image,
-							'path' => $path
+				$id_categoria = Tools::getValue('id_category');
+				$valor = $this->posiciones('abajo',$id_categoria);
+				if (!empty($valor)) {
+					$image = $valor['imagen'];
+					$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/img/'. $image;
+					$this->smarty->assign(array(
+						'image' => $image,
+						'path' => $path
 					));
-				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
+					return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
+				}
 			}
-		}
 	}
 	
 	public function posiciones($enlace,$id_categoria){

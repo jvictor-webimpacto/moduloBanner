@@ -264,7 +264,7 @@ class ModuloBanner extends Module
 	protected function getListContent()
 	{
 		$banners = $this->getBanners();
-		for($i=0 ; $i < count($banners); $i++){
+		for($i=0 ; $i < count($banners); $i++) {
 			$banners[$i]['id_category'] = $banners[$i]['name'];
 		}
 		return $banners;

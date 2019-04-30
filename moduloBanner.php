@@ -69,7 +69,7 @@ class ModuloBanner extends Module
 	
 
     public function getContent()
-	{
+    {
 		$id_banner = (int)Tools::getValue('id_banner');
 		$this->html = "";
         if (Tools::isSubmit('savemoduloBanner')) {
@@ -97,7 +97,7 @@ class ModuloBanner extends Module
     }
     
     protected function renderForm()
-	{
+    {
 		$image_size = "";
 		$image_url = "";
 		$fields_form = array(
@@ -174,7 +174,7 @@ class ModuloBanner extends Module
 
 
     protected function renderList()
-	{
+    {
 			$this->fields_list = array();
 			$this->fields_list['id_banner'] = array(
 				'title' => $this->l('Id banner'),
@@ -217,7 +217,7 @@ class ModuloBanner extends Module
     }
 
     public function processSave()
-	{
+    {
 			$saved = false;
 			if ($id_banner = Tools::getValue('id_banner')) {
 				$banner = new Banner((int)$id_banner);
@@ -259,7 +259,7 @@ class ModuloBanner extends Module
 
 	
     protected function getListContent()
-	{
+    {
 		$banners = $this->getBanners();
         for ($i=0; $i < count($banners); $i++) {
 			$banners[$i]['id_category'] = $banners[$i]['name'];
@@ -269,7 +269,7 @@ class ModuloBanner extends Module
 
 	
     public function getFormValues()
-	{
+    {
 		$fields_value = array();
 		$id_banner = (int)Tools::getValue('id_banner');
         if ($id_banner) {
@@ -290,7 +290,7 @@ class ModuloBanner extends Module
     }
 
     public function arrayHooks()
-	{
+    {
 	
 		$hook = array();
 		
@@ -307,7 +307,7 @@ class ModuloBanner extends Module
     }
 
     public function getBanners()
-	{
+    {
 		$sql = 'SELECT ban.`id_banner`, ban.`id_category`,ban.`hook`,ca.`name`
 			FROM `'._DB_PREFIX_.'banners` ban
 			LEFT JOIN `'._DB_PREFIX_.'category_lang` ca ON (ca.`id_category` = ban.`id_category`)
@@ -318,7 +318,7 @@ class ModuloBanner extends Module
     }
 
     public function hookDisplayLeftColumn($params)
-	{
+    {
         if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
 			$valor = $this->posiciones('izquierda', $id_categoria);
@@ -336,7 +336,7 @@ class ModuloBanner extends Module
 
 
     public function hookDisplayRightColumn($params)
-	{
+    {
         if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
 			$valor = $this->posiciones('derecha', $id_categoria);
@@ -353,7 +353,7 @@ class ModuloBanner extends Module
     }
 
     public function hookDisplayTopColumn($params)
-	{
+    {
         if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
 			$valor = $this->posiciones('arriba', $id_categoria);
@@ -370,7 +370,7 @@ class ModuloBanner extends Module
     }
 
     public function hookDisplayFooter($params)
-	{
+    {
         if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
 			$valor = $this->posiciones('abajo', $id_categoria);
@@ -387,7 +387,7 @@ class ModuloBanner extends Module
     }
 	
     public function posiciones($enlace, $id_categoria)
-	{
+    {
 		$sql = 'SELECT `imagen`
 		FROM `'._DB_PREFIX_.'banners`
 		WHERE `id_category` = '.(int)$id_categoria.' AND  `hook` = "'.$enlace.'"';

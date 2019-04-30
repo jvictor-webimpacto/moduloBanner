@@ -77,15 +77,14 @@ class ModuloBanner extends Module
 		if (Tools::isSubmit('savemoduloBanner')) {
 			if ($this->processSave()) {
 				return $this->html . $this->renderList();
-			}
-			else {
+			}else {
 				return $this->html . $this->renderForm();
 			}
-		} 
+		}
 		elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
 			$this->html .= $this->renderForm();
 			return $this->html;
-		} 
+		}
 		elseif (Tools::isSubmit('deletemoduloBanner')) {
 			$banner = new Banner((int)$id_banner);
 			$banner->delete();
@@ -234,13 +233,13 @@ class ModuloBanner extends Module
 					$banner->imagen = $newname;
 					$target = $path.$newname;
 					move_uploaded_file($_FILES['imagen']['tmp_name'], $target);
-					$miBanner = $this->posiciones($banner->hook , $banner->id_category);
+					$miBanner = $this->posiciones($banner->hook, $banner->id_category);
 						if (empty($miBanner)) {
 							$saved = $banner->save();
 						}
 				}
 		}
-		else{
+		else {
 			$banner = new Banner((int)$id_banner);
 			if (isset($_REQUEST['savemoduloBanner'])) {
 				$banner->id_banner = Tools::getValue('id_banner');
@@ -251,7 +250,7 @@ class ModuloBanner extends Module
 				$banner->imagen = $newname;
 				$target = $path.$newname;
 				move_uploaded_file($_FILES['imagen']['tmp_name'], $target);
-				$miBanner = $this->posiciones($banner->hook , $banner->id_category);
+				$miBanner = $this->posiciones($banner->hook, $banner->id_category);
 				if (empty($miBanner)) {
 					$saved = $banner->save();
 				}
@@ -281,7 +280,7 @@ class ModuloBanner extends Module
 			$fields_value['hook'] = $banner->hook;
 			$fields_value['imagen'] = $banner->imagen;
 		}
-		else{
+		else {
 			$fields_value['id_category'] = "";
 			$fields_value['hook'] = "";
 			$fields_value['imagen'] = "";

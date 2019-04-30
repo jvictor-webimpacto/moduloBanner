@@ -60,7 +60,7 @@ class ModuloBanner extends Module
     public function install()
     {
         include(dirname(__FILE__).'\sql\install.php');
-		return parent::install() &&
+        return parent::install() &&
         $this->registerHook('displayLeftColumn') &&
         $this->registerHook('displayRightColumn') &&
         $this->registerHook('displayTopColumn') &&
@@ -75,7 +75,7 @@ class ModuloBanner extends Module
         if (Tools::isSubmit('savemoduloBanner')) {
             if ($this->processSave()) {
                 return $this->html . $this->renderList();
-            }else {
+            } else {
                 return $this->html . $this->renderForm();
             }
         }
@@ -101,59 +101,58 @@ class ModuloBanner extends Module
         $image_size = "";
         $image_url = "";
         $fields_form = array(
-			'tinymce' => true,
-			'legend' => array(
-				'title' => $this->l('Este es mi formulario del banner'),
+            'tinymce' => true,
+            'legend' => array(
+                'title' => $this->l('Este es mi formulario del banner'),
         ),
-			'input' => array(
-					'id_banner' => array(
-					'type' => 'hidden',
-					'name' => 'id_banner'
+            'input' => array(
+                    'id_banner' => array(
+                    'type' => 'hidden',
+                    'name' => 'id_banner'
                 ),
                 array(
-					'type' => 'select',
-					'label' => $this->l('Category'),
-					'name' => 'id_category',
-					'options' => array(
-						'query' => Category::getAllCategoriesName(true),
-						'id' => 'id_category',
-						'name' => 'name'
+                    'type' => 'select',
+                    'label' => $this->l('Category'),
+                    'name' => 'id_category',
+                    'options' => array(
+                    'query' => Category::getAllCategoriesName(true),
+                        'id' => 'id_category',
+                        'name' => 'name'
                     )
 				),
-				'imagen' => array(
+                'imagen' => array(
 					'type' => 'file',
-					'label' => $this->l('Picture'),
-					'lang' => true,
-					'name' => 'imagen',
-					'display_image' => true,
-					'size' => $image_size,
-					'image' => $image_url ? $image_url : false,
-					'cols' => 40,
-					'rows' => 10,
+                    'label' => $this->l('Picture'),
+                    'lang' => true,
+                    'name' => 'imagen',
+                    'display_image' => true,
+                    'size' => $image_size,
+                    'image' => $image_url ? $image_url : false,
+                    'cols' => 40,
+                    'rows' => 10,
                 ),
                 array(
-
-					'type' => 'select',
-					'lang' => true,
-					'label' => $this->l('Posicion'),
-					'name' => 'hook',
-					'desc' => $this->l('Please Eneter Web Site URL Address.'),
-					'options' => array(
-						'query' => $this->arrayHooks(), // el true es que solo los que estan activos
-						'id' => 'hooks',
-						'name' => 'firstname',
+                    'type' => 'select',
+                    'lang' => true,
+                    'label' => $this->l('Posicion'),
+                    'name' => 'hook',
+                    'desc' => $this->l('Please Eneter Web Site URL Address.'),
+                    'options' => array(
+                        'query' => $this->arrayHooks(), // el true es que solo los que estan activos
+                        'id' => 'hooks',
+                        'name' => 'firstname',
                     )
                 )
             ),
-			'submit' => array(
-				'title' => $this->l('Save'),
+            'submit' => array(
+                'title' => $this->l('Save'),
             ),
-			'buttons' => array(
+            'buttons' => array(
                 array(
-					'href' => AdminController::$currentIndex.'&configure='.$this->name.'&token='.
-					Tools::getAdminTokenLite('AdminModules'),
-					'title' => $this->l('Back to list'),
-					'icon' => 'process-icon-back'
+                    'href' => AdminController::$currentIndex.'&configure='.$this->name.'&token='.
+                    Tools::getAdminTokenLite('AdminModules'),
+                    'title' => $this->l('Back to list'),
+                    'icon' => 'process-icon-back'
                 )
             )
         );
@@ -177,22 +176,22 @@ class ModuloBanner extends Module
     {
             $this->fields_list = array();
             $this->fields_list['id_banner'] = array(
-				'title' => $this->l('Id banner'),
-				'type' => 'text',
-				'search' => false,
-				'orderby' => false,
+                'title' => $this->l('Id banner'),
+                'type' => 'text',
+                'search' => false,
+                'orderby' => false,
             );
             $this->fields_list['id_category'] = array(
-				'title' => $this->l('Category'),
-				'type' => 'text',
-				'search' => false,
-				'orderby' => false,
+                'title' => $this->l('Category'),
+                'type' => 'text',
+                'search' => false,
+                'orderby' => false,
             );
             $this->fields_list['hook'] = array(
-				'title' => $this->l('Enlace'),
-				'type' => 'text',
-				'search' => false,
-				'orderby' => false,
+                'title' => $this->l('Enlace'),
+                'type' => 'text',
+                'search' => false,
+                'orderby' => false,
             );
 
             $helper = new HelperList();
@@ -203,9 +202,9 @@ class ModuloBanner extends Module
             $helper->show_toolbar = true;
             $helper->imageType = 'jpg';
             $helper->toolbar_btn['new'] = array(
-				'href' => AdminController::$currentIndex.'&configure='.$this->name.'&add'.$this->name.'&token='.
-				Tools::getAdminTokenLite('AdminModules'),
-				'desc' => $this->l('Add new')
+                'href' => AdminController::$currentIndex.'&configure='.$this->name.'&add'.$this->name.'&token='.
+                Tools::getAdminTokenLite('AdminModules'),
+                'desc' => $this->l('Add new')
             );
             $helper->title = $this->displayName;
             $helper->table = $this->name;

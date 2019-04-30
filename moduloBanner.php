@@ -316,7 +316,7 @@ class ModuloBanner extends Module
                     'image' => $image,
                     'path' => $path
                 ));
-                return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
+                return $this->display(__FILE__, 'views/templates/admin/hook/front/api/moduloBanner.tpl');
             }
         }
     }
@@ -334,7 +334,7 @@ class ModuloBanner extends Module
                     'image' => $image,
                     'path' => $path
                 ));
-                return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
+                return $this->display(__FILE__, 'views/templates/admin/hook/front/api/moduloBanner.tpl');
             }
         }
     }
@@ -351,7 +351,7 @@ class ModuloBanner extends Module
                     'image' => $image,
                     'path' => $path
                 ));
-                return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
+                return $this->display(__FILE__, 'views/templates/admin/hook/front/api/moduloBanner.tpl');
             }
         }
     }
@@ -368,7 +368,7 @@ class ModuloBanner extends Module
                     'image' => $image,
                     'path' => $path
                 ));
-                return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
+                return $this->display(__FILE__, 'views/templates/admin/hook/front/api/moduloBanner.tpl');
             }
         }
     }

@@ -51,7 +51,8 @@ class ModuloBanner extends Module
             'name' => 'image',
             'dir' => 'object',
         );
-    	if (!Configuration::get('moduloBanner')) {
+		
+		if (!Configuration::get('moduloBanner')) {
             $this->warning = $this->l('No name provided');
 		}
 	}

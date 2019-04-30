@@ -226,6 +226,7 @@ class ModuloBanner extends Module
 					$banner->id_category = Tools::getValue('id_category');
 					$banner->hook = Tools::getValue('hook');
 					$path = dirname(__FILE__).'/img/';
+					ddd($path);
 					$newname = $_FILES['imagen']['name'];
 					$banner->imagen = $newname;
 					$target = $path.$newname;
@@ -329,7 +330,7 @@ class ModuloBanner extends Module
 			$valor = $this->posiciones('izquierda',$id_categoria);
 			if (!empty($valor)) {
 				$image = $valor['imagen'];
-				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/img/'. $image;
+				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
 				$this->smarty->assign(array(
 					'image' => $image,
 					'path' => $path
@@ -346,7 +347,7 @@ class ModuloBanner extends Module
 			$valor = $this->posiciones('derecha',$id_categoria);
 			if (!empty($valor)) {
 				$image = $valor['imagen'];
-				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/img/'. $image;
+				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
 				$this->smarty->assign(array(
 					'image' => $image,
 					'path' => $path
@@ -362,7 +363,7 @@ class ModuloBanner extends Module
 			$valor = $this->posiciones('arriba',$id_categoria);
 			if (!empty($valor)) {
 				$image = $valor['imagen'];
-				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/img/'. $image;
+				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
 				$this->smarty->assign(array(
 					'image' => $image,
 					'path' => $path
@@ -373,19 +374,19 @@ class ModuloBanner extends Module
 	}
 
 	public function HookDisplayFooter($params){
-			if (Tools::getValue('controller') == 'category') {
-				$id_categoria = Tools::getValue('id_category');
-				$valor = $this->posiciones('abajo',$id_categoria);
-				if (!empty($valor)) {
-					$image = $valor['imagen'];
-					$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/img/'. $image;
-					$this->smarty->assign(array(
-						'image' => $image,
-						'path' => $path
-					));
-					return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
-				}
+		if (Tools::getValue('controller') == 'category') {
+			$id_categoria = Tools::getValue('id_category');
+			$valor = $this->posiciones('abajo',$id_categoria);
+			if (!empty($valor)) {
+				$image = $valor['imagen'];
+				$path = _PS_BASE_URL_ . __PS_BASE_URI__ . 'modules/' .$this->name . '/views/img/'. $image;
+				$this->smarty->assign(array(
+					'image' => $image,
+					'path' => $path
+				));
+				return $this->display(__FILE__,'views/templates/moduloBanner.tpl');
 			}
+		}
 	}
 	
 	public function posiciones($enlace,$id_categoria){

@@ -60,7 +60,7 @@ class ModuloBanner extends Module
     public function install()
     {
         include(dirname(__FILE__).'\sql\install.php');
-        return parent::install() &&
+		return parent::install() &&
         $this->registerHook('displayLeftColumn') &&
         $this->registerHook('displayRightColumn') &&
         $this->registerHook('displayTopColumn') &&
@@ -73,26 +73,26 @@ class ModuloBanner extends Module
         $id_banner = (int)Tools::getValue('id_banner');
         $this->html = "";
         if (Tools::isSubmit('savemoduloBanner')) {
-			if ($this->processSave()) {
-				return $this->html . $this->renderList();
-			}else {
-				return $this->html . $this->renderForm();
-			}
+            if ($this->processSave()) {
+                return $this->html . $this->renderList();
+            }else {
+                return $this->html . $this->renderForm();
+            }
         }
         elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
-			$this->html .= $this->renderForm();
-			return $this->html;
+            $this->html .= $this->renderForm();
+            return $this->html;
         }
         elseif (Tools::isSubmit('deletemoduloBanner')) {
-			$banner = new Banner((int)$id_banner);
-			$banner->delete();
-			$this->_clearCache('category.tpl');
-			Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.
-			Tools::getAdminTokenLite('AdminModules'));
+            $banner = new Banner((int)$id_banner);
+            $banner->delete();
+            $this->_clearCache('category.tpl');
+            Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.
+            Tools::getAdminTokenLite('AdminModules'));
         }
         else {
-			$this->html .= $this->renderList();
-			return $this->html;
+            $this->html .= $this->renderList();
+            return $this->html;
         }
     }
     
@@ -104,13 +104,13 @@ class ModuloBanner extends Module
 			'tinymce' => true,
 			'legend' => array(
 				'title' => $this->l('Este es mi formulario del banner'),
-			),
+        ),
 			'input' => array(
 					'id_banner' => array(
 					'type' => 'hidden',
 					'name' => 'id_banner'
-				),
-				array(
+                ),
+                array(
 					'type' => 'select',
 					'label' => $this->l('Category'),
 					'name' => 'id_category',
@@ -118,7 +118,7 @@ class ModuloBanner extends Module
 						'query' => Category::getAllCategoriesName(true),
 						'id' => 'id_category',
 						'name' => 'name'
-					)
+                    )
 				),
 				'imagen' => array(
 					'type' => 'file',
@@ -130,8 +130,8 @@ class ModuloBanner extends Module
 					'image' => $image_url ? $image_url : false,
 					'cols' => 40,
 					'rows' => 10,
-				),
-				array(
+                ),
+                array(
 
 					'type' => 'select',
 					'lang' => true,
@@ -142,62 +142,61 @@ class ModuloBanner extends Module
 						'query' => $this->arrayHooks(), // el true es que solo los que estan activos
 						'id' => 'hooks',
 						'name' => 'firstname',
-					)
-				)
-			),
+                    )
+                )
+            ),
 			'submit' => array(
 				'title' => $this->l('Save'),
-			),
+            ),
 			'buttons' => array(
-				array(
+                array(
 					'href' => AdminController::$currentIndex.'&configure='.$this->name.'&token='.
 					Tools::getAdminTokenLite('AdminModules'),
 					'title' => $this->l('Back to list'),
 					'icon' => 'process-icon-back'
-				)
-			)
+                )
+            )
         );
 
 
-			$helper = new HelperForm();
-			$helper->module = $this;
-			$helper->identifier = $this->identifier;
-			$helper->token = Tools::getAdminTokenLite('AdminModules');
-			$helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
-			$helper->toolbar_scroll = true;
-			$helper->title = $this->displayName;
-			$helper->submit_action = 'savemoduloBanner';
-			$helper->fields_value = $this->getFormValues();
+            $helper = new HelperForm();
+            $helper->module = $this;
+            $helper->identifier = $this->identifier;
+            $helper->token = Tools::getAdminTokenLite('AdminModules');
+            $helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;
+            $helper->toolbar_scroll = true;
+            $helper->title = $this->displayName;
+            $helper->submit_action = 'savemoduloBanner';
+            $helper->fields_value = $this->getFormValues();
 
-			return $helper->generateForm(array(array('form' => $fields_form)));
+            return $helper->generateForm(array(array('form' => $fields_form)));
     }
 
 
     protected function renderList()
     {
-			$this->fields_list = array();
-			$this->fields_list['id_banner'] = array(
+            $this->fields_list = array();
+            $this->fields_list['id_banner'] = array(
 				'title' => $this->l('Id banner'),
 				'type' => 'text',
 				'search' => false,
 				'orderby' => false,
-			);
-			$this->fields_list['id_category'] = array(
+            );
+            $this->fields_list['id_category'] = array(
 				'title' => $this->l('Category'),
 				'type' => 'text',
 				'search' => false,
 				'orderby' => false,
-			);
-
-			$this->fields_list['hook'] = array(
+            );
+            $this->fields_list['hook'] = array(
 				'title' => $this->l('Enlace'),
 				'type' => 'text',
 				'search' => false,
 				'orderby' => false,
-			);
+            );
 
-			$helper = new HelperList();
-			$helper->shopLinkType = '';
+            $helper = new HelperList();
+            $helper->shopLinkType = '';
 			$helper->simple_header = false;
 			$helper->identifier = 'id_banner';
 			$helper->actions = array('edit', 'delete');

@@ -36,8 +36,7 @@ class ModuloBanner extends Module
 {
     public function __construct()
     {
-		
-		$this->name = 'moduloBanner';
+        $this->name = 'moduloBanner';
         $this->tab = 'front_office_features';
         $this->version = '1.0.0';
         $this->author = 'Javier';
@@ -50,7 +49,8 @@ class ModuloBanner extends Module
         $this->displayName = $this->l('Banners');
         $this->description = $this->l('mi modulo del banner');
 		$this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
-		$this->fieldImageSettings = array(
+		
+        $this->fieldImageSettings = array(
             'name' => 'image',
             'dir' => 'object',
         );
@@ -61,8 +61,7 @@ class ModuloBanner extends Module
 	
     public function install()
     {
-		
-		include(dirname(__FILE__).'\sql\install.php');
+        include(dirname(__FILE__).'\sql\install.php');
         return parent::install() &&
         $this->registerHook('displayLeftColumn') &&
         $this->registerHook('displayRightColumn') &&

@@ -43,11 +43,15 @@ class ModuloBanner extends Module
         $this->need_instance = 0;
         $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
         $this->bootstrap = true;
-		parent::__construct();
-		$this->displayName = $this->l('Banners');
+		
+        parent::__construct();
+		
+        $this->displayName = $this->l('Banners');
         $this->description = $this->l('mi modulo del banner');
-		$this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
-		$this->fieldImageSettings = array(
+		
+        $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
+		
+        $this->fieldImageSettings = array(
             'name' => 'image',
             'dir' => 'object',
         );
@@ -60,35 +64,37 @@ class ModuloBanner extends Module
     {
         include(dirname(__FILE__).'\sql\install.php');
         return parent::install() &&
-        	$this->registerHook('displayLeftColumn') &&
-        	$this->registerHook('displayRightColumn') &&
-        	$this->registerHook('displayTopColumn') &&
-        	$this->registerHook('displayFooter');
+        		$this->registerHook('displayLeftColumn') &&
+        		$this->registerHook('displayRightColumn') &&
+        		$this->registerHook('displayTopColumn') &&
+        		$this->registerHook('displayFooter');
 	}
 	
 
 	public function getContent()
 	{
-		$id_banner = (int)Tools::getValue('id_banner');
-		$this->html = "";
-		if (Tools::isSubmit('savemoduloBanner')) {
-				if ($this->processSave()) {
-					return $this->html . $this->renderList();
-				}else {
-						return $this->html . $this->renderForm();
-				}
-		} elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
-				$this->html .= $this->renderForm();
-				return $this->html;
-		} else if (Tools::isSubmit('deletemoduloBanner')) {
+					$id_banner = (int)Tools::getValue('id_banner');
+					$this->html = "";
+					if (Tools::isSubmit('savemoduloBanner')) {
+						if ($this->processSave()) {
+							return $this->html . $this->renderList();
+						}
+						else {
+							return $this->html . $this->renderForm();
+						}
+					} elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
+					$this->html .= $this->renderForm();
+					return $this->html;
+			} else if (Tools::isSubmit('deletemoduloBanner')) {
 					$banner = new Banner((int)$id_banner);
 					$banner->delete();
 					$this->_clearCache('category.tpl');
 					Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'));
-		} else {
+			}
+			else {
 				$this->html .= $this->renderList();
 				return $this->html;
-		}
+			}
 	}
     
 	protected function renderForm()
@@ -293,8 +299,7 @@ class ModuloBanner extends Module
 
 	
 
-	public function arrayHooks()
-	{
+	public function arrayHooks(){
 	
 		$hook = array();
 		
@@ -349,8 +354,7 @@ class ModuloBanner extends Module
 	}
 
 
-	public function hookDisplayRightColumn($params)
-	{
+	public function hookDisplayRightColumn($params){
 			if (Tools::getValue('controller') == 'category') {
 				$id_categoria = Tools::getValue('id_category');
 				$valor = $this->posiciones('derecha',$id_categoria);
@@ -366,8 +370,7 @@ class ModuloBanner extends Module
 			}
 	}
 
-	public function hookDisplayTopColumn($params)
-	{
+	public function hookDisplayTopColumn($params){
 			if (Tools::getValue('controller') == 'category') {
 					$id_categoria = Tools::getValue('id_category');
 					$valor = $this->posiciones('arriba',$id_categoria);
@@ -383,8 +386,7 @@ class ModuloBanner extends Module
 		}
 	}
 
-	public function HookDisplayFooter($params)
-	{
+	public function HookDisplayFooter($params){
 			if (Tools::getValue('controller') == 'category') {
 					$id_categoria = Tools::getValue('id_category');
 					$valor = $this->posiciones('abajo',$id_categoria);
@@ -400,8 +402,7 @@ class ModuloBanner extends Module
 		}
 	}
 	
-	public function posiciones($enlace,$id_categoria)
-	{
+	public function posiciones($enlace,$id_categoria){
 		$sql = 'SELECT `imagen`
 		FROM `'._DB_PREFIX_.'banners`
 		WHERE `id_category` = '.(int)$id_categoria.' AND  `hook` = "'.$enlace.'"';

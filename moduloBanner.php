@@ -50,7 +50,7 @@ class ModuloBanner extends Module
             'dir' => 'object',
         );
         
-        if (!Configuration::get('moduloBanner')) {
+        if (!Configuration::get('modulobanner')) {
             $this->warning = $this->l('No name provided');
         }
     }

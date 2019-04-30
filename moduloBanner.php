@@ -219,7 +219,7 @@ class ModuloBanner extends Module
             $saved = false;
             if ($id_banner = Tools::getValue('id_banner')) {
                 $banner = new Banner((int)$id_banner);
-                    if (isset($_REQUEST['savemoduloBanner'])) {
+                if (isset($_REQUEST['savemoduloBanner'])) {
                     $banner->id_banner = Tools::getValue('id_banner');
                     $banner->id_category = Tools::getValue('id_category');
                     $banner->hook = Tools::getValue('hook');

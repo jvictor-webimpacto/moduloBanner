@@ -275,14 +275,14 @@ class ModuloBanner extends Module
             $fields_value['imagen'] = "";
         }
         $fields_value['id_banner'] = $id_banner;
-		
+        
 
         return $fields_value;
     }
     
     public function arrayHooks()
     {
-	    
+        
         $hook = array();
         
         $hook[0]['hooks'] = 'arriba';

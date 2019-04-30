@@ -1,5 +1,5 @@
 {*
-* 2007-2016 Javier
+* 2007-2019 Javier
 *
 * NOTICE OF LICENSE
 *
@@ -18,7 +18,7 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 *  @author Javier SA <jvictor@webimpacto.es>
-*  @copyright  2007-2016 Javier SA
+*  @copyright  2007-2019 Javier SA
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}

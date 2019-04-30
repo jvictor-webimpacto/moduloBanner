@@ -52,9 +52,9 @@ class ModuloBanner extends Module
             'dir' => 'object',
         );
 		
-		if (!Configuration::get('moduloBanner')) {
+        if (!Configuration::get('moduloBanner')) {
             $this->warning = $this->l('No name provided');
-		}
+        }
 	}
 	
     public function install()
@@ -72,28 +72,28 @@ class ModuloBanner extends Module
 	{
 		$id_banner = (int)Tools::getValue('id_banner');
 		$this->html = "";
-		if (Tools::isSubmit('savemoduloBanner')) {
+        if (Tools::isSubmit('savemoduloBanner')) {
 			if ($this->processSave()) {
 				return $this->html . $this->renderList();
 			}else {
 				return $this->html . $this->renderForm();
 			}
-		}
-		elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
+        }
+        elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
 			$this->html .= $this->renderForm();
 			return $this->html;
-		}
-		elseif (Tools::isSubmit('deletemoduloBanner')) {
+        }
+        elseif (Tools::isSubmit('deletemoduloBanner')) {
 			$banner = new Banner((int)$id_banner);
 			$banner->delete();
 			$this->_clearCache('category.tpl');
 			Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.
 			Tools::getAdminTokenLite('AdminModules'));
-		}
-		else {
+        }
+        else {
 			$this->html .= $this->renderList();
 			return $this->html;
-		}
+        }
 	}
     
 	protected function renderForm()
@@ -261,9 +261,9 @@ class ModuloBanner extends Module
 	protected function getListContent()
 	{
 		$banners = $this->getBanners();
-		for ($i=0; $i < count($banners); $i++) {
+        for ($i=0; $i < count($banners); $i++) {
 			$banners[$i]['id_category'] = $banners[$i]['name'];
-		}
+        }
 		return $banners;
 	}
 
@@ -272,17 +272,17 @@ class ModuloBanner extends Module
 	{
 		$fields_value = array();
 		$id_banner = (int)Tools::getValue('id_banner');
-		if ($id_banner) {
+        if ($id_banner) {
 			$banner = new Banner((int)$id_banner);
 			$fields_value['id_category'] = $banner->id_category;
 			$fields_value['hook'] = $banner->hook;
 			$fields_value['imagen'] = $banner->imagen;
-		}
-		else {
+        }
+        else {
 			$fields_value['id_category'] = "";
 			$fields_value['hook'] = "";
 			$fields_value['imagen'] = "";
-		}
+        }
 		$fields_value['id_banner'] = $id_banner;
 		
 
@@ -319,7 +319,7 @@ class ModuloBanner extends Module
 
 	public function hookDisplayLeftColumn($params)
 	{
-		if (Tools::getValue('controller') == 'category') {
+        if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
 			$valor = $this->posiciones('izquierda', $id_categoria);
 			if (!empty($valor)) {
@@ -331,13 +331,13 @@ class ModuloBanner extends Module
 				));
 				return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
 			}
-		}
+        }
 	}
 
 
 	public function hookDisplayRightColumn($params)
 	{
-		if (Tools::getValue('controller') == 'category') {
+        if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
 			$valor = $this->posiciones('derecha', $id_categoria);
 			if (!empty($valor)) {
@@ -349,12 +349,12 @@ class ModuloBanner extends Module
 				));
 				return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
 			}
-		}
+        }
 	}
 
 	public function hookDisplayTopColumn($params)
 	{
-		if (Tools::getValue('controller') == 'category') {
+        if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
 			$valor = $this->posiciones('arriba', $id_categoria);
 			if (!empty($valor)) {
@@ -366,12 +366,12 @@ class ModuloBanner extends Module
 				));
 				return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
 			}
-		}
+        }
 	}
 
 	public function hookDisplayFooter($params)
 	{
-		if (Tools::getValue('controller') == 'category') {
+        if (Tools::getValue('controller') == 'category') {
 			$id_categoria = Tools::getValue('id_category');
 			$valor = $this->posiciones('abajo', $id_categoria);
 			if (!empty($valor)) {
@@ -383,7 +383,7 @@ class ModuloBanner extends Module
 				));
 				return $this->display(__FILE__, 'views/templates/moduloBanner.tpl');
 			}
-		}
+        }
 	}
 	
 	public function posiciones($enlace, $id_categoria)

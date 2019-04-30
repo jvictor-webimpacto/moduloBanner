@@ -103,7 +103,7 @@ class ModuloBanner extends Module
         $fields_form = array(
             'tinymce' => true,
             'legend' => array(
-                'title' => $this->l('Este es mi formulario del banner'),
+            'title' => $this->l('Este es mi formulario del banner'),
         ),
             'input' => array(
                     'id_banner' => array(

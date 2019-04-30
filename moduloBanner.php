@@ -78,10 +78,10 @@ class ModuloBanner extends Module
             } else {
                 return $this->html . $this->renderForm();
             }
-        }elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
+        } elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
             $this->html .= $this->renderForm();
             return $this->html;
-        }elseif (Tools::isSubmit('deletemoduloBanner')) {
+        } elseif (Tools::isSubmit('deletemoduloBanner')) {
             $banner = new Banner((int)$id_banner);
             $banner->delete();
             $this->_clearCache('category.tpl');

@@ -78,18 +78,18 @@ class ModuloBanner extends Module
             } else {
                 return $this->html . $this->renderForm();
             }
-        }
+        } 
         elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
             $this->html .= $this->renderForm();
             return $this->html;
-        }
+        } 
         elseif (Tools::isSubmit('deletemoduloBanner')) {
             $banner = new Banner((int)$id_banner);
             $banner->delete();
             $this->_clearCache('category.tpl');
             Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.
             Tools::getAdminTokenLite('AdminModules'));
-        }
+        } 
         else {
             $this->html .= $this->renderList();
             return $this->html;
@@ -233,7 +233,7 @@ class ModuloBanner extends Module
                         $saved = $banner->save();
                     }
                 }
-            }
+            } 
             else {
                 $banner = new Banner((int)$id_banner);
                 if (isset($_REQUEST['savemoduloBanner'])) {
@@ -274,7 +274,7 @@ class ModuloBanner extends Module
             $fields_value['id_category'] = $banner->id_category;
             $fields_value['hook'] = $banner->hook;
             $fields_value['imagen'] = $banner->imagen;
-        }
+        } 
         else {
             $fields_value['id_category'] = "";
             $fields_value['hook'] = "";

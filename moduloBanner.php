@@ -257,7 +257,7 @@ class ModuloBanner extends Module
             $banners[$i]['id_category'] = $banners[$i]['name'];
         }
         return $banners;
-	}
+    }
     
     
     public function getFormValues()
@@ -282,9 +282,9 @@ class ModuloBanner extends Module
     
     public function arrayHooks()
     {
-	
+	    
         $hook = array();
-		
+        
         $hook[0]['hooks'] = 'arriba';
         $hook[0]['firstname'] = 'arriba';
         $hook[1]['hooks'] = 'derecha';
@@ -293,7 +293,7 @@ class ModuloBanner extends Module
         $hook[2]['firstname'] = 'abajo';
         $hook[3]['hooks'] = 'izquierda';
         $hook[3]['firstname'] = 'izquierda';
-		
+        
         return $hook;
     }
     
@@ -376,7 +376,7 @@ class ModuloBanner extends Module
             }
         }
     }
-	
+    
     public function posiciones($enlace, $id_categoria)
     {
         $sql = 'SELECT `imagen`

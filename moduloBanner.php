@@ -64,37 +64,39 @@ class ModuloBanner extends Module
     {
         include(dirname(__FILE__).'\sql\install.php');
         return parent::install() &&
-        		$this->registerHook('displayLeftColumn') &&
-        		$this->registerHook('displayRightColumn') &&
-        		$this->registerHook('displayTopColumn') &&
-        		$this->registerHook('displayFooter');
+        $this->registerHook('displayLeftColumn') &&
+        $this->registerHook('displayRightColumn') &&
+        $this->registerHook('displayTopColumn') &&
+        $this->registerHook('displayFooter');
 	}
 	
 
 	public function getContent()
 	{
-					$id_banner = (int)Tools::getValue('id_banner');
-					$this->html = "";
-					if (Tools::isSubmit('savemoduloBanner')) {
-						if ($this->processSave()) {
-							return $this->html . $this->renderList();
-						}
-						else {
-							return $this->html . $this->renderForm();
-						}
-					} elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
-					$this->html .= $this->renderForm();
-					return $this->html;
-			} else if (Tools::isSubmit('deletemoduloBanner')) {
-					$banner = new Banner((int)$id_banner);
-					$banner->delete();
-					$this->_clearCache('category.tpl');
-					Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'));
-			}
-			else {
+		$id_banner = (int)Tools::getValue('id_banner');
+		$this->html = "";
+		if (Tools::isSubmit('savemoduloBanner')) {
+				if ($this->processSave()) {
+					return $this->html . $this->renderList();
+				}
+				else {
+					return $this->html . $this->renderForm();
+				}
+		} 
+		elseif (Tools::isSubmit('updatemoduloBanner') || Tools::isSubmit('addmoduloBanner')) {
+				$this->html .= $this->renderForm();
+				return $this->html;
+		} 
+		else if (Tools::isSubmit('deletemoduloBanner')) {
+				$banner = new Banner((int)$id_banner);
+				$banner->delete();
+				$this->_clearCache('category.tpl');
+				Tools::redirectAdmin(AdminController::$currentIndex.'&configure='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules'));
+		}
+		else {
 				$this->html .= $this->renderList();
 				return $this->html;
-			}
+		}
 	}
     
 	protected function renderForm()

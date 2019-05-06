@@ -30,7 +30,7 @@ if (!defined('_PS_VERSION_')) {
 
 require_once('classes/Banner.php');
 
-class ModuloBanner extends Module
+class Modulobanner extends Module
 {
     public function __construct()
     {

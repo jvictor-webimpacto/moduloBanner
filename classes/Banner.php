@@ -38,8 +38,8 @@ class Banner extends ObjectModel
         'primary' => 'id_banner',
         'fields' => array(
             'id_category' => array('type' => self::TYPE_INT, 'validate' => 'isUnsignedInt', 'copy_post' => false),
-            'hook' => array('type' => self::TYPE_STRING, 'validate' => 'isName', 'size' => 255),
-            'imagen' => array('type' => self::TYPE_STRING, 'validate' => 'isName', 'size' => 255)
+            'hook' => array('type' => self::TYPE_STRING, 'size' => 255),
+            'imagen' => array('type' => self::TYPE_STRING,  'size' => 255)
         ),
     );
 }
